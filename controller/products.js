@@ -1,7 +1,7 @@
 const productsModel = require('../models/ProductsModel')
 const randomstring = require('randomstring')
 module.exports.create = async (req,res) => { 
-    const newProduct = new productModel({ 
+    const newProduct = new productsModel({ 
         id: randomstring.generate(), 
         name: req.body.name,
         description: req.body.description,
@@ -10,7 +10,7 @@ module.exports.create = async (req,res) => {
     })
     await newProduct.save()
         .then(() => { 
-            res.status(200).json("New product created")
+            res.status(201).json("New product created")
         })
         .catch((err) => { 
             res.status(500).json(err)
