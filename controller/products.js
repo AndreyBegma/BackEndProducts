@@ -2,7 +2,7 @@ const productsModel = require('../models/ProductsModel')
 const randomstring = require('randomstring')
 module.exports.create = async (req,res) => { 
     const newProduct = new productsModel({ 
-        id: randomstring.generate(), 
+        id: randomstring.generate(8), 
         name: req.body.name,
         description: req.body.description,
         quantity: req.body.quantity,
@@ -18,7 +18,7 @@ module.exports.create = async (req,res) => {
 }
 
 module.exports.delete = async (req,res) => {
-    await productsModel.findOneAndDelete({id:req.body.id})
+    await productsModel.findOneAndDelete({id:req.query.id})
         .then(()=> res.status(200).json("Product deleted"))
         .catch((err) => res.status(500).json(err))
 }
@@ -55,6 +55,7 @@ module.exports.getItem = async (req,res) => {
 }
 
 module.exports.changePrice = async (req,res) => { 
+    // localhost:4000/?id=14
     await productsModel.findByIdAndUpdate({id:req.params.id}, {price: req.body.id})
         .then(() => res.status(200).json("Success updated"))
         .catch(err => res.status(500).json(err))
