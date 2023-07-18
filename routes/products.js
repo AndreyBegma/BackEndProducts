@@ -11,9 +11,9 @@ router.delete('/delete', controller.delete)
 router.get('/get-all', controller.getList)
 // localhost:4000/products/get-all
 router.get('/get', controller.getPage)
-// localhost:4000/products/get
+// localhost:4000/products/get?page=1&limit=10
 router.get('/get-item', controller.getItem)
-// localhost:4000/products/get-item
+// localhost:4000/products/get-item?id=10
  
 router.put('/change-price', controller.changePrice)
 // localhost:4000/products/change-price

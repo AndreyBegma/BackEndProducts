@@ -35,7 +35,7 @@ module.exports.getList = async (req,res) => {
 module.exports.getPage = async (req,res) => {
     let firstItem = (req.query.page * req.query.limit) - req.query.limit - 1
     firstItem = (firstItem < 0)? 0 : firstItem
-    let products = await productsModel.fing()
+    let products = await productsModel.find()
         .skip(firstItem)
         .limit(req.query.limit)
     if (products) {
@@ -46,7 +46,7 @@ module.exports.getPage = async (req,res) => {
 }
 
 module.exports.getItem = async (req,res) => {
-    let productItem = await productsModel.findOne({id: req.params.id})
+    let productItem = await productsModel.findOne({id: req.query.id})
     if (productItem) {
         res.status(200).json(productItem)
     } else { 
@@ -56,7 +56,7 @@ module.exports.getItem = async (req,res) => {
 
 module.exports.changePrice = async (req,res) => { 
     // localhost:4000/?id=14
-    await productsModel.findByIdAndUpdate({id:req.params.id}, {price: req.body.id})
+    await productsModel.findByIdAndUpdate({id:req.query.id}, {price: req.query.price})
         .then(() => res.status(200).json("Success updated"))
         .catch(err => res.status(500).json(err))
 }
