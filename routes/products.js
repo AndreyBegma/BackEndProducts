@@ -14,8 +14,10 @@ router.get('/get', controller.getPage)
 // localhost:4000/products/get?page=1&limit=10
 router.get('/get-item', controller.getItem)
 // localhost:4000/products/get-item?id=10
- 
+router.get("/count", controller.getCount)
 router.put('/change-price', controller.changePrice)
+
+router.put("/change-name", controller.changeName)
 // localhost:4000/products/change-price
 
 

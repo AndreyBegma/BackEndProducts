@@ -56,7 +56,19 @@ module.exports.getItem = async (req,res) => {
 
 module.exports.changePrice = async (req,res) => { 
     // localhost:4000/?id=14
-    await productsModel.findByIdAndUpdate({id:req.query.id}, {price: req.query.price})
+    await productsModel.findAndUpdate({id:req.query.id}, {price: req.query.price})
         .then(() => res.status(200).json("Success updated"))
         .catch(err => res.status(500).json(err))
+}
+
+module.exports.getCount = async(req,res) => { 
+    let listProducts = await productsModel.find()
+    res.status(200).json({
+        count: listProducts.length
+    })
+}
+
+module.exports.changeName = async(req,res) => { 
+    await productsModel.findOneAndUpdate({id: req.query.id}, {name: req.query.name})
+    res.status(200).json("Product name has been changed")
 }
